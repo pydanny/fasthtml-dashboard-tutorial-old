@@ -1,7 +1,6 @@
 """
 TODOs:
 
-- [ ] Add chart view
 - [ ] Add chart edit view (cover how to handle labels)
 - [ ] Add chart delete view (reinforcement covering how to handle labels)
 - [ ] Add other chart types
@@ -54,7 +53,7 @@ def chart(slug: str):
     chart = json.loads(Path(f'charts/{slug}.json').read_text())
 
     return (
-        Header(H1('Super Dashboard'), cls="container"),
+        Header(H1('Super Dashboard'), P(A("<- home", href="/")), cls="container"),
         Main(
             P(chart.get("title")),
             P(Small(chart.get("description"))),
