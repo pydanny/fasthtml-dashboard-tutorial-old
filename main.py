@@ -2,10 +2,12 @@
 TODOs:
 
 - [ ] Add chart view
-- [ ] Add chart edit view
-- [ ] Add chart delete view
+- [ ] Add chart edit view (cover how to handle labels)
+- [ ] Add chart delete view (reinforcement covering how to handle labels)
 - [ ] Add other chart types
 - [ ] Switch to Python charting library once I am where I can pip install
+- [ ] Mention in tut use of cls vs class
+
 
 STRETCH GOALS
 - [ ] Pull data from external source(s)
