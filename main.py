@@ -53,14 +53,18 @@ def chart(slug: str):
     chart = json.loads(Path(f'charts/{slug}.json').read_text())
 
     return (
-        Header(H1('Super Dashboard'), P(A("<- home", href="/")), cls="container"),
+        Header(H1('Super Dashboard'), cls="container"),
         Main(
-            P(chart.get("title")),
+            P(A("Home", href="/"), f" / {chart['title']}"),
             P(Small(chart.get("description"))),
-            Div(id="myDiv"), cls="container"),
-        # TODO - Maybe replace this with plotly.py
-        Script(f"var data = {chart.get('data', [])}; Plotly.newPlot('myDiv', data);")
-    )
+            Div(id="myDiv"),
+            cls="container", hx_boost=True),
+            # TODO - Maybe replace this with plotly.py
+            Script(f"var data = {chart.get('data', [])}; Plotly.newPlot('myDiv', data);"),
+
+        ),
+        
+
 
 
 if __name__ == '__main__':
