@@ -1,3 +1,19 @@
+"""
+TODOs:
+
+- [ ] Add chart view
+- [ ] Add chart edit view
+- [ ] Add chart delete view
+- [ ] Add other chart types
+- [ ] Switch to Python charting library once I am where I can pip install
+
+STRETCH GOALS
+- [ ] Pull data from external source(s)
+- [ ] Add chart search feature
+- [ ] JS Animated chart for wow factor
+"""
+
+
 import json
 from pathlib import Path
 import uvicorn
