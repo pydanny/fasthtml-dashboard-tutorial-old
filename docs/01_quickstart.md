@@ -112,9 +112,9 @@ run_uv()
 
 You can do more! Read on to learn what we can do to make parts of the URL dynamic.
 
-## Variable Rules in URLs
+## Variable in URLs
 
-You can add variable sections to a URL by marking sections with `{variable_name}`. Your function then receives the `{variable_name}` as a keyword argument, but only if it is the correct type. 
+You can add variable sections to a URL by marking sections with `{variable_name}`. Your function then receives the `{variable_name}` as a keyword argument, but only if it is the correct type. Here's an example:
 
 ``` python title="main.py" hl_lines="9-11" linenums="1"
 from fasthtml.fastapp import * 
@@ -132,7 +132,7 @@ def namer(name: str, age: int):
 run_uv()
 ```
 
-Try it out by going to this address: [127.0.0.1:5001/uma/5](http://127.0.0.1:5001/uma/5). You should get a page that says "Hello Uma, age 5"
+Try it out by going to this address: [127.0.0.1:5001/uma/5](http://127.0.0.1:5001/uma/5). You should get a page that says "Hello Uma, age 5".
 
 ### What's happening?
 
@@ -143,3 +143,30 @@ Try it out by going to this address: [127.0.0.1:5001/uma/5](http://127.0.0.1:500
 ### What happens if we enter incorrect data?
 
 The [127.0.0.1:5001/uma/5](http://127.0.0.1:5001/uma/5) URL works because `5` is an integer. If we enter something that is not, such as [127.0.0.1:5001/uma/five](http://127.0.0.1:5001/uma/five), then FastHTML will return an error instead of a web page.
+
+!!! note "FastHTML URL routing supports more complex types"
+
+    The two examples we provide here use Python's built-in `str` and `int` types, but you can use your own types, including more complex ones such as those defined by libraries like `attrs`, `pydantic`, and even `sqlmodel`. 
+
+## HTTP Methods
+
+Most commonly URL routes for web apps are defined as HTTP GET methods. However, form submissions often are sent as HTTP POST. When dealing with more dynamic web page designs, also known as Single Page Apps (SPA for short), the need can arise for other methods such as HTTP PUT and HTTP DELETE. The way FastHTML handles this is by changing the decorator.
+
+```python title="main.py" hl_lines="5-7 9-11" linenums="1"
+from fasthtml.fastapp import * 
+
+app = fast_app()
+
+@app.get("/")
+def home():
+  return Titled("HTTP GET", P("Handle GET"))
+
+@app.post("/")
+def home():
+  return Titled("HTTP POST", P("Handle POST"))
+
+run_uv()
+```
+
+If you look at the hightlighted code, you'll see that the two view functions are named identically. The routing decorators allow for method overloading, something that isn't common in Python. This is really useful when building forms, as both the view (GET) and action (POST) views can be named the same for easy discovery. 
+
